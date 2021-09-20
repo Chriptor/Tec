@@ -22,7 +22,7 @@ log = function (req,res,next) {
 }
 
 Autenticar = function (req,res,next) {
-    const {nombre,precio,clave} = req.body;
+    const {nombre,codigo,clave} = req.body;
     console.log(clave)
     if(clave == "Hola"){
         return next()

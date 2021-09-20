@@ -15,8 +15,6 @@ class Producto {
         this.nombre = nombre
         this.cantidad = cantidad
         this.precio = precio
-
-        // this.Id = Id.cont
         this.Id = Id.cont
     }
 }

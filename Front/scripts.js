@@ -20,10 +20,7 @@ async function getProduct(id){
     const data = await resp.json(); 
     let products = document.getElementById("products");
     var contenedor = document.createElement("div");
-
     
-    console.log(data.id)
-
     // contenedor.setAttribute("id", "p" + i);
 
     let descr=data.short_description.content
@@ -35,7 +32,7 @@ async function getProduct(id){
                 <h5 class="card-title">${data.name}</h5>
                 <p class="card-text">${descr.split("\n", 1)}</p>
                 <p class="card-text">${data.buy_box_winner.price} ${data.buy_box_winner.currency_id}</p>
-                <a onclick="carrito(${data})" class="btn btn-primary"> <i class="fas fa-cart-plus"></i></a>
+                <a href="#" class="btn btn-primary" onclick="`+agregarProducto(data.id)+`"> <i class="fas fa-cart-plus"></i></a>
             </div>
     </div>`;
     contenedor.innerHTML += producto
@@ -70,14 +67,6 @@ async function getBestSeller(params) {
     // getBestSeller(urlCelulares)
     // getBestSeller(urlComputacion)
     // getBestSeller(urlVideojuegos)
-
-    async function getProductos() {
-        const result = await fetch('http://localhost:3001/paises');
-        const productos = await result.json();
-        console.log(productos);  
-    }
-    getPaises()
-=
     
     // async function getPaises() {
     //     const result = await fetch('http://localhost:3001/paises');
@@ -106,14 +95,47 @@ async function getBestSeller(params) {
                     <h5 class="card-title">${data.name}</h5>
                     <p class="card-text">${descr}</p>
                     <p class="card-text">${data.buy_box_winner.price} ${data.buy_box_winner.currency_id}</p>
-                    <a href="#" class="btn btn-primary"> <i class="fas fa-cart-plus"></i></a>
+                    <a href="#" class="btn btn-primary" onclick="agregarProducto(${data})"> <i class="fas fa-cart-plus"></i></a>
                 </div>
         </div>`;
         contenedor.innerHTML += producto
         products.appendChild(contenedor)
         
-
-
-
     }
-
+    async function getCart() {
+        const result = await fetch('http://localhost:3001/cart');
+        const cart = await result.json();
+        console.log(cart);  
+    }
+    
+    
+    
+    
+    
+    async function agregarProducto(Articulo) {
+        await fetch('http://localhost:3001/cart', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(Articulo)
+        });
+        console.log("Agregado")
+    }
+    async function eliminarProducto(id) {
+        await fetch('http://localhost:3001/cart/'+ id);
+        const cart = getCart();
+        return cart
+    }
+    
+    
+    
+    let Articulo = {
+        id:"KIKIww1",
+        nombre: "Tenis Nike",
+        cantidad: 1,
+        precio: 500,
+        clave:"Una clave para protegernos a todos"
+    }
+    
+    

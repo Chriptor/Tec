@@ -1,2 +1,1 @@
-# Tec
-Clases de tecla
+# TeclaWekkly

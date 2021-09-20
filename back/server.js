@@ -10,6 +10,7 @@ const app = express();
 dotenv.config();
 
 
+
 //Middlelware
 app.use(express.json());
 app.use(cors());
@@ -27,12 +28,12 @@ app.get('/', function (req, res) {
 })
 
 //Endpoint para obtener paises de la DB
-app.get('/Producto',cors(midd.corsOption),function (req, res) {
-    res.send(db.buscaProducto)
+app.get('/paises',cors(midd.corsOption),function (req, res) {
+    res.send(db.Paises)
 })
 
-app.post('/Producto',midd.Autenticar, function (req, res) {
-    if (!req.body.nombre || !req.body.precio) {
+app.post('/paises',midd.Autenticar, function (req, res) {
+    if (!req.body.nombre || !req.body.codigo) {
         db.respuesta = {
             codigo: 502,
             error: true,
@@ -43,23 +44,23 @@ app.post('/Producto',midd.Autenticar, function (req, res) {
             db.respuesta = {
                 codigo: 503,
                 error: true,
-                mensaje: 'producto ya registrado'
+                mensaje: 'País ya registrado'
                 
             }
         } else {
-            db.nuevoPais(req.body.nombre, req.body.precio)
+            db.nuevoPais(req.body.nombre, req.body.codigo)
 
             db.respuesta = {
                 codigo: 200,
                 error: false,
-                mensaje: 'producto creado'
+                mensaje: '¨País creado'
             }
         }
     }
     res.send(db.respuesta)
 })
 
-app.delete('/Eliminar/:id', function (req, res) {
+app.delete('/paises/:pais', function (req, res) {
 
     if (!db.buscaPais(req.params.pais)) {
         db.respuesta = {
@@ -72,7 +73,7 @@ app.delete('/Eliminar/:id', function (req, res) {
         db.respuesta = {
             codigo: 200,
             error: false,
-            mensaje: 'producto eliminado'
+            mensaje: '¨País eliminado'
         }
     }
     res.send(db.respuesta);
