@@ -10,17 +10,18 @@ let respuesta = {
 }
 
 class Producto {
-    constructor(id,nombre,cantidad,precio){
+    constructor(id,nombre,cantidad,precio,detalle){
         this.id = id
         this.nombre = nombre
         this.cantidad = cantidad
         this.precio = precio
+        this.detalle=detalle
         this.Id = Id.cont
     }
 }
 
-const nuevoProducto = function(id,nombre,cantidad,precio){
-    Cart[id] = new Producto(id,nombre,cantidad,precio);
+const nuevoProducto = function(id,nombre,cantidad,precio,detalle){
+    Cart[id] = new Producto(id,nombre,cantidad,precio,detalle);
     Id.cont++
 }
 
