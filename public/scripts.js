@@ -1,3 +1,5 @@
+const { getData } = require("../pruba");
+
 // token para acceder a los mas vendidos por categoria
 const token="APP_USR-3388052911498377-092718-9344154a25951dfb1d6dcf1d9f56b03c-354069378";
 // url general para best sellers
@@ -17,6 +19,7 @@ async function getProduct(id){
     let url = urlProduct+id;
     const resp = await fetch(url);
     const data = await resp.json(); 
+    // console.log(data);
     let products = document.getElementById("products");
     var contenedor = document.createElement("div");
     let descr=data.short_description.content
@@ -36,14 +39,7 @@ async function getProduct(id){
     
 }
 
-//Obtener categorias para el navbar en ¡¡¡ construccion 
-async function getCategorias() {
-    let url = params;
-    const resp = await fetch(url);
-    const data = await resp.json();
-    let cont=0
-    
-}
+
 //Obtener los mas vendidos de ciertas categorias
 async function getBestSeller(params) {
     let url = params;
@@ -174,3 +170,18 @@ async function getBestSeller(params) {
 
 // agregarProducto(Articulo)
 
+getData=async()=>{
+
+    try {
+        let url = "https://api.mercadolibre.com/sites/MLA/search?q=Motorola%20G6";
+    const resp = await fetch(url);
+    const data = await resp.json();
+    console.log(data)
+    return data
+    } catch (error) {
+        console.log(error)
+    }
+    
+    
+}
+getData()

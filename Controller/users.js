@@ -60,45 +60,13 @@ module.exports.buscar1Usuario=async(id)=>{
         console.log(error)
     }
     }
-    module.exports.listarSolicitudes=async(id)=>{
-
-        try {
-            const Usuario = await User.findById(id, 'nombre apellido_p apellido_m pais ciudad  estudios  idiomas linkedin ' );
-            return Usuario
-        } catch (error) {
-            console.log(error)
-        }
-        }
-    module.exports.buscarSolicitudes=async(id)=>{
-
-        try {
-            const Usuario = await User.findById(id, 'amigos' );
-            const resul= Usuario.amigos[0].solicitudes
-            
-            return resul
-        } catch (error) {
-            console.log(error)
-        }
-        }
-        
-module.exports.buscarImagenUsuario=async(id)=>{
+    
+module.exports.listarProductos=async()=>{
 
     try {
-        const Usuario = await User.findById(id, 'foto_perfil' );
-        
+        const Usuario = await User.findById(id, 'nombre apellido_p apellido_m pais ciudad fecha_nac estudios certificaciones idiomas linkedin Hobbies' );
         return Usuario
     } catch (error) {
         console.log(error)
     }
     }
-
-    module.exports.enviarSolicitud=async(id,miId)=>{
-
-        try {
-            const Usuario = await User.findByIdAndUpdate(id, {amigos: [{ solicitudes: miId }] });
-            console.log("solicitud enviada");
-            return Usuario
-        } catch (error) {
-            console.log(error)
-        }
-        }

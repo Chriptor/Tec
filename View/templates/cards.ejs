@@ -1,0 +1,16 @@
+<% if (arrayProduct.length > 0) { %>
+    <% arrayProduct.forEach(product => { 
+    
+<div  style="display: flex;justify-content: space-between;flex-wrap: wrap;"  id="products">
+    <div class="card h-100" style="width: 22rem; margin-top: 19px; padding-bottom: 1rem; padding-top: 1rem;">
+        <img src="${data.pictures[0].url}" class="card-img-top" alt="...">
+             <div class="card-body">
+                    <h5 class="card-title">${data.name}</h5>
+                    <p class="card-text">${descr.split("\n", 1)}</p>
+                    <p class="card-text">${data.buy_box_winner.price} ${data.buy_box_winner.currency_id}</p>
+                    <a  class="btn btn-primary"> <i class="fas fa-cart-plus"></i></a>
+                </div>
+        </div>
+        
+</div>
+<%  }) } %>
