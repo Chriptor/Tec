@@ -36,6 +36,9 @@ app.get('/Ofertas', (req, res) => {
 app.get('/LogIn', (req, res) => {
     res.render("LogIn")
 })
+app.get('/Registro', (req, res) => {
+    res.render("Registro")
+})
 app.use((req, res, next) => {
     res.status(404).render("404")
 })
