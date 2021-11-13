@@ -1,4 +1,4 @@
-const { getData } = require("../pruba");
+
 
 // token para acceder a los mas vendidos por categoria
 const token="APP_USR-3388052911498377-092718-9344154a25951dfb1d6dcf1d9f56b03c-354069378";
@@ -55,10 +55,10 @@ async function getBestSeller(params) {
          }    
 }  
 
-    getBestSeller(urlElectronica)
-    getBestSeller(urlCelulares)
-    getBestSeller(urlComputacion)
-    getBestSeller(urlVideojuegos)
+    // getBestSeller(urlElectronica)
+    // getBestSeller(urlCelulares)
+    // getBestSeller(urlComputacion)
+    // getBestSeller(urlVideojuegos)
 
     async function getProductos() {
         const result = await fetch('http://localhost:3001/paises');
@@ -93,90 +93,18 @@ async function getBestSeller(params) {
         
     }
 
-    // async function carrito(id){
-    //     let url = urlProduct+id;
-    //     const resp = await fetch(url);
-    //     const data = await resp.json(); 
-    //     console.log("hola")
-    //     if(!data.id||!data.name||!data.buy_box_winner.price){
-    //         console.log("no hay nada ")
-    //     }else{
-    //         if(data.id == id){
-    //             let products = document.getElementById("car");
-    //             var contenedor = document.createElement("div");
-    //             let descr=data.short_description.content
-    //             let producto = `
-              
-    //             <div class="row">
-    //             <div class="col-sm-12" >
-    //               <h5 style="color: white; ">${data.name}</h5>
-    //               <div class="row">
-    //                 <div class="col-4 col-sm-2">
-    //                   <img style="width: 100px; height: 100px;" src="https://www.sams.com.mx/images/product-images/img_small/980023267s.jpg" alt="">
-    //                 </div>
-    //                 <div class="col-2 col-sm-3" style="display: flex; align-items: center; ">
-    //                   <p style="color: white; text-align: justify;">Caracteristicas de bla bla bla bla bal abla ablab abla abla bal abla alba lba bla</p>
-    //                 </div>
-    //                 <div class="col-2 col-sm-2" style="display: flex; align-items: center;">
-    //                   <p style="color: white;">Cantidad: 1</p>
-    //                 </div>
-    //                 <div class="col-2 col-sm-2" style="display: flex; align-items: center;">
-    //                   <p style="color: white;">Precio: $350</p>
-    //                 </div>
-                    
-    //                 <div class="col-0 col-sm-2 nav-item" style="display: flex; align-items: center; justify-content: center;">
-    //                   <a style="background-color: rgb(255, 196, 0);" class="btn btn-block" ><i class="fa fa-minus"</i></i></a>
-    //                   <p>.</p>
-    //                   <a style="background-color: rgb(255, 196, 0);" class="btn btn-block" ><i class="fa fa-plus"></i></i></a>
-    //                   <p>.</p>
-    //                   <a style="background-color: rgb(255, 196, 0);" class="btn btn-block" ><i class="fa fa-window-close"></i></i></a>
 
-    //                 </div>
-    //               </div>
-    //             </div>
-    //           </div>`;
-            
-    //             contenedor.innerHTML += producto
-    //             products.appendChild(contenedor)
-    //         }
-    //     }
-    // }
-    
-// async function agregarProducto(Articulo) {
-//     await fetch('http://localhost:3000/cart', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(Articulo)
-//     });
- 
-// }
-// async function eliminarProducto(id) {
-//     await fetch('http://localhost:3000/cart/'+ id);
-//     const cart = getCart();
-//     return cart
-// }
-
-
-
-// let Articulo = {
-//     id:"KIKIww1",
-//     nombre: "Tenis Nike",
-//     cantidad: 1,
-//     precio: 500,
-//     clave:"Una clave para protegernos a todos"
-// }
-
-// agregarProducto(Articulo)
-
-getData=async()=>{
+getItem=async(id)=>{
 
     try {
-        let url = "https://api.mercadolibre.com/sites/MLA/search?q=Motorola%20G6";
+        let url = "https://api.mercadolibre.com/items/"+id;
     const resp = await fetch(url);
     const data = await resp.json();
-    console.log(data)
+    console.log(data);
+    const resul = {
+        id: data.id
+    }
+    console.log(resul);
     return data
     } catch (error) {
         console.log(error)
@@ -184,4 +112,22 @@ getData=async()=>{
     
     
 }
-getData()
+getItem("MLA919394331")
+getData=async()=>{
+    let products=""
+    try {
+        let url = "https://api.mercadolibre.com/sites/MLM/search?category=MLM1000";
+    const resp = await fetch(url);
+    const data = await resp.json();
+    for (let i=0; i<data.results.length; i++){
+        // products = products + await getItem(data.results[i].id)
+        // console.log(typeof(data.results[i].id))
+    }
+    // console.log(typeof(JSON.parse(products)));
+    return data
+    } catch (error) {
+        console.log(error)
+    }
+    
+    
+}
