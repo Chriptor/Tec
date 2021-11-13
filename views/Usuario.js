@@ -6,9 +6,10 @@ router.get('/user', async (req, res) => {
     res.render('usuarios', arrayUsuario)
 })
 
-router.post('/registrar', async (req, res) => {
-    users.newUser(req,res);
-})
+// router.post('/registrar', async (req, res) => {
+//     users.newUser(req,res);
+//     res.render('/LogIn', {msg:"Registrado con exito"})
+// })
 
 
 

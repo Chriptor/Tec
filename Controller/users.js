@@ -32,12 +32,12 @@ module.exports.newUser = async(req,res)=>{
 try {
     const userDB = await user.save();
     
-    res.json({
-        error: null,
-        // data: userDB
-    })
+    res
+    .status(201)
+    .redirect(301, '/LogIn1')
 } catch (error) {
-    res.status(400).json(error )    
+    res.status(400).json(error ) 
+       
 }
 }
 

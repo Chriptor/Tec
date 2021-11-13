@@ -93,41 +93,39 @@ async function getBestSeller(params) {
         
     }
 
-
 getItem=async(id)=>{
-
+    
     try {
         let url = "https://api.mercadolibre.com/items/"+id;
-    const resp = await fetch(url);
-    const data = await resp.json();
-    console.log(data);
-    const resul = {
-        id: data.id
-    }
-    console.log(resul);
-    return data
+        const resp = await fetch(url);
+        const data = await resp.json();
+        const resul= {id: data.id,nombre: data.title, precio: data.price, imagen:data.thumbnail}
+    
+    return resul
     } catch (error) {
         console.log(error)
     }
     
     
 }
-getItem("MLA919394331")
+// getItem("MLA919394331")
 getData=async()=>{
-    let products=""
+    let products=[]
     try {
         let url = "https://api.mercadolibre.com/sites/MLM/search?category=MLM1000";
     const resp = await fetch(url);
     const data = await resp.json();
     for (let i=0; i<data.results.length; i++){
-        // products = products + await getItem(data.results[i].id)
+        products.push(await getItem(data.results[i].id))
         // console.log(typeof(data.results[i].id))
     }
+    console.log(products);
     // console.log(typeof(JSON.parse(products)));
-    return data
+    return products
     } catch (error) {
         console.log(error)
     }
     
     
 }
+// getData()

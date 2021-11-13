@@ -8,7 +8,8 @@ const login = require('./views/login')
 const { verificaToken } = require('./Controller/validaciones');
 const cookieParser = require('cookie-parser');
 const lista=require('./Controller/users')
-
+const lisPr=require('./Controller/producto')
+// const api=require('./Model/product')
 
 const app = express();
 
@@ -64,19 +65,28 @@ app.get('/salir', async (req, res) => {
 
 
 app.get('/', (req, res) => {
+lisPr.guardarProductos()
     res.render("index")
 })
 app.get('/Ofertas', (req, res) => {
-    res.render("Ofertas")
+    res.render("Ofertas"
+    // ,{arrayProduct: api.getData()}
+    )
 })
 app.get('/LogIn', (req, res) => {
-    res.render("LogIn")
+    res.render("LogIn",{msg:"Bienvenido"})
 })
-app.get('/Bienvenida', (req, res) => {
-    res.render("Bienvenida")
+app.get('/LogIn1', (req, res) => {
+    res.render("LogIn",{msg:"registrado con exito"})
+})
+app.get('/Bienvenida', verificaToken, (req, res) => {
+    res.render("./Admin/Bienvenida")
 })
 app.get('/Registro', (req, res) => {
     res.render("Registro")
+})
+app.post('/registrar', async (req, res) => {
+    await lista.newUser(req,res);
 })
 app.use((req, res, next) => {
     res.status(404).render("404")
